@@ -1,0 +1,74 @@
+﻿@page "/booking"
+@using WomenTaxi.Shared
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<h3>Заказать такси)</h3>
+
+<EditForm Model="@newOrder" OnValidSubmit="@HandleSubmit">
+    <div class="mb-3">
+        <label class="form-label">Адрес подачи</label>
+        <InputText class="form-control" @bind-Value="newOrder.PickupAddress" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Адрес назначения</label>
+        <InputText class="form-control" @bind-Value="newOrder.DestinationAddress" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ваш телефон</label>
+        <InputText class="form-control" @bind-Value="newOrder.Phone" />
+    </div>
+    <button type="submit" class="btn btn-primary" disabled="@isSubmitting">Заказать</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(message))
+{
+        <div class="alert alert-success mt-3">@message</div>
+}
+@if (!string.IsNullOrEmpty(error))
+{
+        <div class="alert alert-danger mt-3">@error</div>
+}
+
+<div class="mt-4 text-center">
+    <a href="tel:+78001234567" class="btn btn-danger btn-lg">
+        Срочно позвонить диспетчеру
+    </a>
+    <p class="text-muted mt-2">Если заказ не отправляется, звоните: +7 (800) 123-45-67</p>
+</div>
+
+@code {
+    private TaxiOrder newOrder = new();
+    private bool isSubmitting = false;
+    private string message = "";
+    private string error = "";
+
+    private async Task HandleSubmit()
+    {
+        isSubmitting = true;
+        message = "";
+        error = "";
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/orders", newOrder);
+            if (response.IsSuccessStatusCode)
+            {
+                message = "Заказ принят! Водитель свяжется с вами.";
+                newOrder = new();
+            }
+            else
+            {
+                error = "Ошибка на сервере. Попробуйте позже или позвоните диспетчеру.";
+            }
+        }
+        catch (HttpRequestException)
+        {
+            error = "Нет интернета. Проверьте соединение или позвоните диспетчеру.";
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+}

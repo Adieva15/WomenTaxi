@@ -1,0 +1,33 @@
+﻿@page
+@model WomenTaxi.Pages.Booking.IndexModel
+@{
+    ViewData["Title"] = "Заказать такси";
+}
+
+<h1>@ViewData[@"Title"]</h1>
+
+<form method="post">
+    <div class="form-group mb-3">
+        <label for="pickupAddress" class="form-label">Адрес подачи</label>
+        <input type="text" class="form-control" id="pickupAddress" name="pickupAddress" required/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="destinationAddress" class="form-label">Адрес назначения</label>
+        <input type="text" class="form-control" id="destinationAddress" name="destinationAddress" required>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="phone" class="form-label">Ваш телефон</label>
+        <input type="tel" class="form-control" itemid="phone" name="phone" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Заказать такси</button>
+</form>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @ViewData["Message"]
+    </div>
+}
