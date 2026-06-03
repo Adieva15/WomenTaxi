@@ -1,7 +1,14 @@
 using WomenTaxi.Client.Pages;
 using WomenTaxi.Components;
+using Microsoft.EntityFrameworkCore;
+using WomenTaxi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Добавляем DbContext с PostgreSQL
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container, +(DbContext, SignalR, авторизация и т.д.)
 builder.Services.AddRazorComponents()
