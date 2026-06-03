@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
 var configuration = builder.Configuration;
 var connString = configuration.GetConnectionString("DefaultConnection");
 Console.WriteLine($"DB Connection: {connString}");
+
 */
 
 var app = builder.Build();
