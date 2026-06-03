@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WomenTaxi.Shared.Models
 {
-    class Ride
+    public class Ride
     {
-        """начальная версия """
+        // начальная версия 
         public int Id { get; set; }
         public int PassengerId { get; set; }
         public int? DriverId { get; set; } // nullable, пока не назначен
