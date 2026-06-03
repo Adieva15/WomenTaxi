@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WomenTaxi.Shared.Dtos
 {
-    class AuthResponseDto
+    public class AuthResponseDto
     {
         //ответ после логина/регистрации
         public string Token { get; set; } = string.Empty;
