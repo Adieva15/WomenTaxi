@@ -1,4 +1,7 @@
-\WomenTaxi\appsetings.Development.json 
+
 .vs/
+# Игнорировать файлы настроек разработки
+**/appsettings.Development.json
+**/appsettings.Production.json
 bin/
 obj/

@@ -15,14 +15,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 //если ваш сервер сам будет ходить в сторонние API (Яндекс.Карты, 2ГИС, платежи). Без этого не получите расстояние и стоимость поездки
-builder.Services.AddHttpClient();
-
-
-//код в сервера временные строки, для проверки
-
-var configuration = builder.Configuration;
-var connString = configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine($"DB Connection: {connString}");
+builder.Services.AddHttpClient();// Регистрируем фабрику HTTP-клиентов
 
 
 
